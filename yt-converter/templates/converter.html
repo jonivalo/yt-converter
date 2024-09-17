@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Converter{% endblock %}
+
+{% block content %}
+<h1 class="title">🔄 Convert YouTube Video to MP3 🔄</h1>
+<form action="/converter" method="post" class="form">
+    <input type="url" name="link" placeholder="YouTube Link" class="input" required>
+    <button type="submit" class="button">Convert MP3</button>
+</form>
+{% endblock %}
