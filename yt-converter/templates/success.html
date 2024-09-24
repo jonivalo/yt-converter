@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+<h1>Your MP3 file is ready! 🎉</h1>
+<a href="{{ url_for('download') }}" class="button">Download your MP3</a>
+<a href="{{ url_for('converter') }}" class="button">Convert another video</a>
+{% endblock %}
