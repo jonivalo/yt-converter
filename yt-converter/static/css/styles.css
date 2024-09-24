@@ -59,6 +59,7 @@ main {
     padding: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
+    position: relative;
 }
 
 .title {
@@ -125,14 +126,14 @@ footer {
 }
 
 .flash-messages {
-    position: absolute;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    margin-bottom: 20px;
     list-style: none;
     padding: 0;
-    width: 80%;
+    width: 100%;
     max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .flash-messages li {

@@ -3,7 +3,18 @@
 {% block title %}Converter{% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="flash-messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
 <h1 class="title">🔄 Convert YouTube Video to MP3 🔄</h1>
+
 <form action="/converter" method="post" class="form">
     <input type="url" name="link" placeholder="YouTube Link" class="input" required>
     <button type="submit" class="button">Convert MP3</button>

@@ -44,7 +44,6 @@ def register():
             new_user = User(username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
-            flash('Registration successful! Please log in.')
             return redirect(url_for('login'))
     return render_template('register.html')
 
@@ -65,15 +64,41 @@ def converter():
             return redirect(url_for('converter'))
 
         video_file = download_video(link)
+        print(f"Downloaded video file: {video_file}")
+
         if video_file:
             mp3_file = convert_to_mp3(video_file)
+            print(f"Converted MP3 file: {mp3_file}")
+
             if os.path.exists(mp3_file):
-                return send_file(mp3_file, as_attachment=True)
+                session['mp3_file'] = mp3_file
+                return redirect(url_for('success'))
             else:
                 flash('Error converting video to MP3.')
         else:
             flash('Failed to download video.')
+
     return render_template('converter.html')
+
+@app.route('/success')
+def success():
+    mp3_file = session.get('mp3_file')
+    print(f"MP3 file in session: {mp3_file}")
+    if mp3_file and os.path.exists(mp3_file):
+        return render_template('success.html')
+    else:
+        flash('MP3 file not found.')
+        return redirect(url_for('converter'))
+
+@app.route('/download')
+def download():
+    mp3_file = session.get('mp3_file')
+    print(f"MP3 file for download: {mp3_file}")
+    if mp3_file and os.path.exists(mp3_file):
+        return send_file(mp3_file, as_attachment=True)
+    else:
+        flash('MP3 file not available.')
+        return redirect(url_for('converter'))
 
 def download_video(link, path='.'):
     ydl_opts = {
