@@ -1,6 +1,6 @@
 # YouTube Converter
 
-Built using Flask and SQLAlchemy
+Built using Flask, SQLAlchemy, FFmpeg, and yt-dlp
 
 ## Features
 
